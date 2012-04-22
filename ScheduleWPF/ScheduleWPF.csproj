@@ -108,6 +108,7 @@
   <ItemGroup>
     <Resource Include="info.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>

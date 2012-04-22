@@ -46,17 +46,17 @@ namespace ScheduleWPF
             
             Configuration.Instance.Constraints.Add(new AllProfessorsDayLimitConstraint(9));
             Configuration.Instance.Constraints.Add(new ClassCountDayLimitConstraint(3));
-            /*Configuration.Instance.Constraints.Add(new ProfessorDayAndTimeConstraint(new List<TimeDayRequirement>
+            Configuration.Instance.Constraints.Add(new ProfessorDayAndTimeConstraint(new List<TimeDayRequirement>
                 {
                     new TimeDayRequirement(Configuration.Instance.Professors[0], 3, new TimeSpan(8,0,0), new TimeSpan(9,0,0)),
                     new TimeDayRequirement(Configuration.Instance.Professors[1], 4, new TimeSpan(9,0,0), new TimeSpan(10,0,0))
                 }
             ));
-            */
+            
             Configuration.Instance.Constraints.Add(new ProfessorDayConstraint(Configuration.Instance.Professors[0], new List<int> { 0, 1 }));
-            //Configuration.Instance.Constraints.Add(new ProfessorTimeConstraint(Configuration.Instance.Professors[0], new TimeSpan(9,0,0), new TimeSpan(10,0,0)));
-            //Configuration.Instance.Constraints.Add(new ProfessorTimeOverlapConstraint());
-            //Configuration.Instance.Constraints.Add(new RoomTimeOverlapConstraint());
+            Configuration.Instance.Constraints.Add(new ProfessorTimeConstraint(Configuration.Instance.Professors[0], new TimeSpan(9,0,0), new TimeSpan(10,0,0)));
+            Configuration.Instance.Constraints.Add(new ProfessorTimeOverlapConstraint());
+            Configuration.Instance.Constraints.Add(new RoomTimeOverlapConstraint());
             Configuration.Instance.Constraints.Add(new SingleProfessorDayLimitConstraint(Configuration.Instance.Professors[2], 4));
 
             var groups = Configuration.Instance.Groups;

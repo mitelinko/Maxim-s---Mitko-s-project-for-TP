@@ -13,6 +13,16 @@ namespace ScheduleCommon
         Course course;
         TimeSpan length;
         Room room;
+        TimeSpan startTime;
+        public TimeSpan StartTime
+        {
+            get { return startTime; }
+            set
+            {
+                startTime = value;
+                OnPropertyChanged("StartTime");
+            }
+        }
         public StudentGroup Group
         {
             get { return group; }
@@ -55,6 +65,7 @@ namespace ScheduleCommon
             course = aCourse;
             length = aLength;
             room = aRoom;
+            startTime = TimeSpan.Zero;
         }
         public override string ToString()
         {
@@ -62,7 +73,8 @@ namespace ScheduleCommon
         }
         void OnPropertyChanged(string aPropertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(aPropertyName));
+            if(PropertyChanged!=null)
+                PropertyChanged(this, new PropertyChangedEventArgs(aPropertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

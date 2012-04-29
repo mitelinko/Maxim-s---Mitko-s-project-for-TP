@@ -33,41 +33,42 @@ namespace ScheduleWPF
         {
             Conflicts = new ObservableCollection<ConstraintResult>();
 
-            Configuration.Instance.Groups = new ObservableCollection<StudentGroup>{new StudentGroup("11A"),
-                new StudentGroup("11B"), new StudentGroup("11V"), new StudentGroup("11G")};
+            Configuration.Instance.Groups = new ObservableCollection<StudentGroup>();
+            Configuration.Instance.Groups.Add(new StudentGroup("11A"));
+            Configuration.Instance.Groups.Add(new StudentGroup("11B"));
+            Configuration.Instance.Groups.Add(new StudentGroup("11V"));
+            Configuration.Instance.Groups.Add(new StudentGroup("11G"));
             Configuration.Instance.Professors = new ObservableCollection<Professor>{new Professor("Abramowitch"),
                 new Professor("Mitova"), new Professor("Mitov")};
             Configuration.Instance.Courses = new ObservableCollection<Course>
                 {new Course("Maths", Configuration.Instance.Professors[0], CourseType.NormalCourse),
                 new Course("BEL", Configuration.Instance.Professors[1], CourseType.NormalCourse), 
-                new Course("TP", Configuration.Instance.Professors[2], CourseType.ComputerCourse)};
+                new Course("TP", Configuration.Instance.Professors[2], CourseType.ComputerCourse),
+                new Course("Break", Professor.Empty, CourseType.Break)};
             Configuration.Instance.Rooms = new ObservableCollection<Room>{new Room("42", CourseType.NormalCourse), new Room("21", CourseType.NormalCourse),
                 new Room("34", CourseType.ComputerCourse)};
-            
-            Configuration.Instance.Constraints.Add(new AllProfessorsDayLimitConstraint(9));
-            Configuration.Instance.Constraints.Add(new ClassCountDayLimitConstraint(3));
-            Configuration.Instance.Constraints.Add(new ProfessorDayAndTimeConstraint(new List<TimeDayRequirement>
+
+            Configuration.Instance.Constraints.Add(new AllProfessorsDayLimitConstraint("PREDEFINED", 9));
+            Configuration.Instance.Constraints.Add(new ClassCountDayLimitConstraint("PREDEFINED", 3));
+            Configuration.Instance.Constraints.Add(new ProfessorDayAndTimeConstraint("PREDEFINED", new List<TimeDayRequirement>
                 {
-                    new TimeDayRequirement(Configuration.Instance.Professors[0], 3, new TimeSpan(8,0,0), new TimeSpan(9,0,0)),
-                    new TimeDayRequirement(Configuration.Instance.Professors[1], 4, new TimeSpan(9,0,0), new TimeSpan(10,0,0))
+                    new TimeDayRequirement(Configuration.Instance.Professors[0], 2, new TimeSpan(8,0,0), new TimeSpan(9,0,0)),
+                    new TimeDayRequirement(Configuration.Instance.Professors[1], 3, new TimeSpan(9,0,0), new TimeSpan(10,0,0))
                 }
             ));
-            
-            Configuration.Instance.Constraints.Add(new ProfessorDayConstraint(Configuration.Instance.Professors[0], new List<int> { 0, 1 }));
-<<<<<<< HEAD
-            Configuration.Instance.Constraints.Add(new ProfessorTimeConstraint(Configuration.Instance.Professors[0], new TimeSpan(9,0,0), new TimeSpan(10,0,0)));
-=======
-            //Configuration.Instance.Constraints.Add(new ProfessorTimeConstraint(Configuration.Instance.Professors[0], new TimeSpan(9,0,0), new TimeSpan(10,0,0)));
->>>>>>> origin/master
-            Configuration.Instance.Constraints.Add(new ProfessorTimeOverlapConstraint());
-            Configuration.Instance.Constraints.Add(new RoomTimeOverlapConstraint());
-            Configuration.Instance.Constraints.Add(new SingleProfessorDayLimitConstraint(Configuration.Instance.Professors[2], 4));
+
+            Configuration.Instance.Constraints.Add(new ProfessorDayConstraint("PREDEFINED", Configuration.Instance.Professors[0], new List<int> { 0, 1 }));
+            Configuration.Instance.Constraints.Add(new ProfessorTimeConstraint("PREDEFINED", Configuration.Instance.Professors[0], new TimeSpan(9, 0, 0), new TimeSpan(10, 0, 0)));
+            Configuration.Instance.Constraints.Add(new ProfessorTimeOverlapConstraint("PREDEFINED"));
+            Configuration.Instance.Constraints.Add(new RoomTimeOverlapConstraint("PREDEFINED"));
+            Configuration.Instance.Constraints.Add(new SingleProfessorDayLimitConstraint("PREDEFINED", Configuration.Instance.Professors[2], 4));
 
             var groups = Configuration.Instance.Groups;
             var courses = Configuration.Instance.Courses;
             var rooms = Configuration.Instance.Rooms;
             var profs = Configuration.Instance.Professors;
             var classes = Configuration.Instance.Classes;
+            CurrentSchedule = new Schedule();
             for(int i = 0;i<7;i++)
             {
                 CurrentSchedule[i][groups[0]] = new ObservableCollection<Class>();
@@ -79,21 +80,32 @@ namespace ScheduleWPF
                 CurrentSchedule.SetStartTime(i, groups[2], TimeSpan.FromHours(8));
                 CurrentSchedule.SetStartTime(i, groups[3], TimeSpan.FromHours(8));
             }
+            CurrentSchedule.DaysChangedGroupAdded(groups[0]);
+            CurrentSchedule.DaysChangedGroupAdded(groups[1]);
+            CurrentSchedule.DaysChangedGroupAdded(groups[2]);
+            CurrentSchedule.DaysChangedGroupAdded(groups[3]);
             classes.Add(groups[0], new TrulyObservableCollection<ClassContainer>());
             classes.Add(groups[1], new TrulyObservableCollection<ClassContainer>());
             classes.Add(groups[2], new TrulyObservableCollection<ClassContainer>());
             classes.Add(groups[3], new TrulyObservableCollection<ClassContainer>());
+            classes[groups[0]].Add(new ClassContainer(new Class(groups[0], courses[3], TimeSpan.FromMinutes(40), Room.Empty), 1000));
             classes[groups[0]].Add(new ClassContainer(new Class(groups[0], courses[0], TimeSpan.FromMinutes(80), rooms[1]), 10));
             classes[groups[0]].Add(new ClassContainer(new Class(groups[0], courses[1], TimeSpan.FromMinutes(80), rooms[0]), 4));
             classes[groups[0]].Add(new ClassContainer(new Class(groups[0], courses[2], TimeSpan.FromMinutes(80), rooms[2]), 5));
             classes[groups[1]].Add(new ClassContainer(new Class(groups[1], courses[0], TimeSpan.FromMinutes(80), rooms[1]), 2));
             classes[groups[1]].Add(new ClassContainer(new Class(groups[1], courses[1], TimeSpan.FromMinutes(80), rooms[0]), 6));
             classes[groups[1]].Add(new ClassContainer(new Class(groups[1], courses[2], TimeSpan.FromMinutes(80), rooms[2]), 4));
+            classes[groups[2]].Add(new ClassContainer(new Class(groups[2], courses[0], TimeSpan.FromMinutes(80), rooms[1]), 2));
+            classes[groups[2]].Add(new ClassContainer(new Class(groups[2], courses[1], TimeSpan.FromMinutes(80), rooms[0]), 6));
+            classes[groups[2]].Add(new ClassContainer(new Class(groups[2], courses[2], TimeSpan.FromMinutes(80), rooms[2]), 4));
+            classes[groups[3]].Add(new ClassContainer(new Class(groups[3], courses[0], TimeSpan.FromMinutes(80), rooms[1]), 2));
+            classes[groups[3]].Add(new ClassContainer(new Class(groups[3], courses[1], TimeSpan.FromMinutes(80), rooms[0]), 6));
+            classes[groups[3]].Add(new ClassContainer(new Class(groups[3], courses[2], TimeSpan.FromMinutes(80), rooms[2]), 4));
         }
         public DaysModel()
         {
             Application.Current.DispatcherUnhandledException += new System.Windows.Threading.DispatcherUnhandledExceptionEventHandler(Current_DispatcherUnhandledException);
-            CurrentSchedule = new Schedule();
+            
             var conf = Configuration.Instance;
             
             InitializeSchedule();
@@ -178,8 +190,11 @@ namespace ScheduleWPF
             }
             else if (dropInfo.Data is ClassContainer)
             {
-                dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
-                dropInfo.Effects = DragDropEffects.Copy;
+                if (((ClassContainer)dropInfo.Data).Count > 0)
+                {
+                    dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
+                    dropInfo.Effects = DragDropEffects.Copy;
+                }
             }
         }
 

@@ -49,7 +49,7 @@
                     <Button Click="RemoveButton_Click" Grid.Column="1">X</Button>
                     <Label Grid.Column="0" FontWeight="Bold" FontSize="14" Foreground="Black" Content="{Binding Path=Course.Name}" Margin="0" Padding="2"></Label>
                 </Grid>
-                    
+                <Label TextOptions.TextFormattingMode="Display" Content="{Binding Path=StartTime}" Margin="0" Padding="2"/>    
                 <Label TextOptions.TextFormattingMode="Display" Content="{Binding Path=Course.Professor.Name}" Margin="0" Padding="2"></Label>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -65,7 +65,7 @@
         </DataTemplate>
         <DataTemplate x:Key="comboGroupsTemplate">
             <StackPanel>
-                <Label FontWeight="Bold" FontSize="14" Foreground="Black" Content="{Binding Path=Name}" Margin="0" Padding="2"></Label>
+                <Label Foreground="Black" Content="{Binding Path=Name}" Margin="0" Padding="2"></Label>
             </StackPanel>
         </DataTemplate>
         <Style x:Key="buttonStyle">
@@ -95,7 +95,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -151,10 +150,7 @@
             <GridSplitter Grid.Column ="0" Width="3" Background="Gray"/>
             <GridSplitter Grid.Column ="1" Width="3" Background="Gray"/>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource buttonStyle}">Close</Button>
-            <Button Style="{StaticResource buttonStyle}">OK</Button>
-        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
         <StackPanel Margin="2" Grid.Row="0" Orientation="Horizontal">
             <ComboBox Margin="2" Name="comboClass" Width="100" SelectionChanged="comboClass_SelectionChanged" Style="{StaticResource comboGroupsStyle}"></ComboBox>
             <Button Margin="2" HorizontalAlignment="Right" Name="buttonOpenConfig" Width="100" Click="buttonOpenConfig_Click">Configuration</Button>

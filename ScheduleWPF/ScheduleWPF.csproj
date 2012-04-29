@@ -59,6 +59,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SingleProfessorDayLimitWindow.xaml.cs">
+      <DependentUpon>SingleProfessorDayLimitWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AllProfessorsDayLimitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClassCountDayLimitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,9 +78,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AllProfessorsDayLimitWindow.xaml.cs">
+      <DependentUpon>AllProfessorsDayLimitWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClassCountDayLimitWindow.xaml.cs">
+      <DependentUpon>ClassCountDayLimitWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
@@ -80,8 +97,33 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProfessorDayAndTimeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfessorDaysOffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfessorTimeOffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SingleProfessorDayLimitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProfessorDayAndTimeWindow.xaml.cs">
+      <DependentUpon>ProfessorDayAndTimeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfessorDaysOffWindow.xaml.cs">
+      <DependentUpon>ProfessorDaysOffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfessorTimeOffWindow.xaml.cs">
+      <DependentUpon>ProfessorTimeOffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -108,7 +150,6 @@
   <ItemGroup>
     <Resource Include="info.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
   <ItemGroup>

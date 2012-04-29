@@ -1,0 +1,70 @@
+﻿<Window x:Class="ScheduleWPF.ProfessorDayAndTimeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add a Professor Day&amp;Time Constraint" Loaded="Window_Loaded" Height="275" Width="832" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column ="0" Width="3" Background="Gray"/>
+            <ListBox Name="listRequirements" Grid.Column="0" Margin="5"/>
+            
+            
+            <StackPanel Grid.Column="1" Margin="5">
+                <ComboBox Name="comboProfessors" Margin="5" Height="23" Width="170" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox Name="comboDays" Margin="5" Height="23" Width="170" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ComboBoxItem>Monday</ComboBoxItem>
+                    <ComboBoxItem>Tuesday</ComboBoxItem>
+                    <ComboBoxItem>Wednesday</ComboBoxItem>
+                    <ComboBoxItem>Thursday</ComboBoxItem>
+                    <ComboBoxItem>Friday</ComboBoxItem>
+                </ComboBox>
+
+                <StackPanel Margin="5" Width="170"  Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Margin="2" Width="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Start Time:</Label>
+                    <TextBox Name="txtStartHour" Margin="4" Width="30" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                    <Label Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">:</Label>
+                    <TextBox Name="txtStartMin" Margin="4" Width="30" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="5" Width="170" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Margin="2" Width="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">End Time:</Label>
+                    <TextBox Name="txtEndHour" Margin="4" Width="30" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                    <Label Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">:</Label>
+                    <TextBox Name="txtEndMin" Margin="4" Width="30" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                </StackPanel>
+
+                <StackPanel Height="30" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Name="btnAdd" Width="80" Margin="2" Click="btnAddClick">Add</Button>
+                    <Button Name="btnDel" Width="80" Margin="2" Click="btnDelClick">Delete</Button>
+                    <Button Name="btnClear" Width="80" Margin="2" Click="btnClearClick">Clear</Button>
+                </StackPanel>
+
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
+                <Label Margin="2" VerticalContentAlignment="Center">Name:</Label>
+                <TextBox Name="txtName" Margin="2" Width="150"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
+                <Button Name="btnCreate" Width="80" Margin="2" Click="btnCreateClick">Create</Button>
+                <Button Name="btnCancel" Width="80" Margin="2" Click="btnCnacelClick">Cancel</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

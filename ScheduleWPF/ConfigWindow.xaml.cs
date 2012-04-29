@@ -154,5 +154,127 @@ namespace ScheduleWPF
                 MessageBox.Show("Oops. Couldn't load!");
             }
         }
+
+        private void buttonCreateConstraint_Click(object sender, RoutedEventArgs e)
+        {
+            if (comboConstraintType.SelectedIndex == -1)
+            {
+                MessageBox.Show("A selected Constraint is required.");
+            }
+
+            if (comboConstraintType.SelectedIndex == 0)
+            {
+                AllProfessorsDayLimitWindow constraintWindow = new AllProfessorsDayLimitWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new AllProfessorsDayLimitConstraint(constraintWindow.ConstraintName, constraintWindow.MaximumClassesPerDay);
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+
+            if (comboConstraintType.SelectedIndex == 1)
+            {
+                ClassCountDayLimitWindow constraintWindow = new ClassCountDayLimitWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new ClassCountDayLimitConstraint(constraintWindow.ConstraintName, constraintWindow.MaximumSameClassesPerDay);
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+
+            if (comboConstraintType.SelectedIndex == 2)
+            {
+                ProfessorDayAndTimeWindow constraintWindow = new ProfessorDayAndTimeWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new ProfessorDayAndTimeConstraint(constraintWindow.ConstraintName, constraintWindow.Requirements.ToList());
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+
+            if (comboConstraintType.SelectedIndex == 3)
+            {
+                ProfessorDaysOffWindow constraintWindow = new ProfessorDaysOffWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new ProfessorDayConstraint(constraintWindow.ConstraintName, (constraintWindow.comboProf.SelectedItem as Professor), constraintWindow.Days);
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+
+            if (comboConstraintType.SelectedIndex == 4)
+            {
+                ProfessorTimeOffWindow constraintWindow = new ProfessorTimeOffWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new ProfessorTimeConstraint(constraintWindow.ConstraintName, (constraintWindow.comboProf.SelectedItem as Professor), constraintWindow.Start, constraintWindow.End);
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+
+            if (comboConstraintType.SelectedIndex == 5)
+            {
+                SingleProfessorDayLimitWindow constraintWindow = new SingleProfessorDayLimitWindow();
+                var dialogResult = constraintWindow.ShowDialog();
+                if (dialogResult.Value)
+                {
+                    var constraint = new SingleProfessorDayLimitConstraint(constraintWindow.ConstraintName, (constraintWindow.comboProf.SelectedItem as Professor), constraintWindow.MaximumClassesPerDay);
+                    if (!Configuration.Instance.Constraints.Contains(constraint))
+                    {
+                        Configuration.Instance.Constraints.Add(constraint);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ooops. This constraint already exists!");
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

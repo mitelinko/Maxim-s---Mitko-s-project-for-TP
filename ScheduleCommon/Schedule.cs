@@ -23,13 +23,53 @@ namespace ScheduleCommon
                 days[i] = new Dictionary<StudentGroup, ObservableCollection<Class>>();
                 startTimes[i] = new Dictionary<StudentGroup, TimeSpan>();
             }
+            foreach (StudentGroup g in Configuration.Instance.Groups)
+            {
+                DaysChangedGroupAdded(g);
+            }
+            Configuration.Instance.Groups.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Groups_CollectionChanged);
+        }
+
+        void Groups_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach(StudentGroup g in e.NewItems)
+                {
+                    DaysChangedGroupAdded(g);
+                }
+            }
         }
         /// <summary>
         /// A dictionary of StudentGroups and corresponding List of Classes
         /// </summary>
         /// <param name="index">The day of the week.</param>
         /// <returns></returns>
+        public void DaysChangedGroupAdded(StudentGroup aGroup)
+        {
+            for (int day = 0; day < days.Length; day++)
+            {
+                if (days[day].ContainsKey(aGroup))
+                days[day][aGroup].CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Value_CollectionChanged);
+            }
+        }
 
+        void Value_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var col = (IList<Class>)sender;
+            for (int day = 0; day < days.Length; day++)
+            {
+                foreach (var kv in days[day])
+                {
+                    TimeSpan startTime = GetStartTime(day, kv.Key);
+                    foreach (var c in kv.Value)
+                    {
+                        c.StartTime = startTime;
+                        startTime += c.Length;
+                    }
+                }
+            }
+        }
         public int Length
         {
             get

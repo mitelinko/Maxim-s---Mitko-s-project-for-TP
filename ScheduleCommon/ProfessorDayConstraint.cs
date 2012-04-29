@@ -10,10 +10,25 @@ namespace ScheduleCommon
     {
         private Professor prof;
         private List<int> off;
-        public ProfessorDayConstraint(Professor professor, List<int> daysOff)
+        public string Name { get; set; }
+        public ProfessorDayConstraint(string aName, Professor professor, List<int> daysOff)
         {
+            Name = aName;
             prof = professor;
             off = daysOff;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is ProfessorDayConstraint)) return false;
+            var pdc = (ProfessorDayConstraint)obj;
+            return (pdc.prof == this.prof) && (pdc.off == this.off);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", Name, "Professor Days off");
         }
 
         public ConstraintResult Check(Schedule sched)
@@ -34,14 +49,14 @@ namespace ScheduleCommon
                         if (classs.Course.Professor == prof)
                         {
                             pass = false;
-                            string error = string.Format("Professor Days Off conflict: professor {0} conflicts in day {1}",
-                                prof, day);
+                            string error = string.Format("Conflict: professor {0} does not want to work on {1}",
+                                prof, ConversionServices.GetDayNameFromDayNumber(day));
                             errorContainer.AppendLine(error);
                         }
                     }
                 }
             }
-            return new ConstraintResult(pass, errorContainer.ToString());
+            return new ConstraintResult(pass, errorContainer.ToString().Trim());
         }
     }
 }

@@ -9,9 +9,24 @@ namespace ScheduleCommon
     public class ProfessorDayAndTimeConstraint : IConstraint
     {
         private List<TimeDayRequirement> requirements;
-        public ProfessorDayAndTimeConstraint(List<TimeDayRequirement> aRequirements)
+        public string Name { get; set; }
+        public ProfessorDayAndTimeConstraint(string aName, List<TimeDayRequirement> aRequirements)
         {
+            Name = aName;
             requirements = aRequirements;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is ProfessorDayAndTimeConstraint)) return false;
+            var pdtc = (ProfessorDayAndTimeConstraint)obj;
+            return (pdtc.requirements == this.requirements);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", Name, "Professor Day&Time off");
         }
 
         public ConstraintResult Check(Schedule sched)
@@ -39,15 +54,15 @@ namespace ScheduleCommon
                             if ((classStart >= req.Start && classStart <= req.End) || (classEnd >= req.Start && classEnd <= req.End))
                             {
                                 pass = false;
-                                string error = string.Format("Professor Day&Time conflict: professor {0} conflicts on day {3} between {1}-{2}",
-                                    req.Professor, classStart, classEnd, req.Day);
+                                string error = string.Format("Conflict: professor {0} does not want to work on {3} between {1:hh\\:mm}-{2:hh\\:mm}",
+                                    req.Professor, classStart, classEnd, ConversionServices.GetDayNameFromDayNumber(req.Day));
                                 errorContainer.AppendLine(error);
                             }
                         }
                     }
                 }
             }
-            return new ConstraintResult(pass, errorContainer.ToString());
+            return new ConstraintResult(pass, errorContainer.ToString().Trim());
         }
     }
 }

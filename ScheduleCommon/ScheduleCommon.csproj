@@ -56,9 +56,7 @@
     <Compile Include="Room.cs" />
     <Compile Include="RoomTimeOverlapConstraint.cs" />
     <Compile Include="Schedule.cs" />
-    <Compile Include="SomeConstraint.cs" />
     <Compile Include="StudentGroup.cs" />
-    <Compile Include="TimeOverlapConstraint.cs" />
     <Compile Include="TrulyObservableCollection.cs" />
   </ItemGroup>
   <ItemGroup>

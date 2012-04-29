@@ -11,11 +11,26 @@ namespace ScheduleCommon
         private Professor prof;
         private TimeSpan start;
         private TimeSpan end;
-        public ProfessorTimeConstraint(Professor professor, TimeSpan start, TimeSpan end)
+        public string Name { get; set; }
+        public ProfessorTimeConstraint(string aName, Professor professor, TimeSpan start, TimeSpan end)
         {
+            Name = aName;
             this.prof = professor;
             this.start = start;
             this.end = end;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is ProfessorTimeConstraint)) return false;
+            var ptc = (ProfessorTimeConstraint)obj;
+            return (ptc.prof == this.prof) && (ptc.start == this.start) && (ptc.end == this.end);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", Name, "Professor Time off");
         }
 
         public ConstraintResult Check(Schedule sched)
@@ -39,7 +54,7 @@ namespace ScheduleCommon
                             TimeSpan classEnd = classStart + classs.Length;
                             if( (classStart>=start && classStart<=end) || (classEnd>=start && classEnd<=end) ){
                                 pass = false;
-                                string error = string.Format("Professor Time Off conflict: professor {0} conflicts between {1}-{2}",
+                                string error = string.Format("Conflict: professor {0} does not want to work between {1:hh\\:mm}-{2:hh\\:mm}",
                                     prof, classStart, classEnd);
                                 errorContainer.AppendLine(error);
                             }
@@ -47,7 +62,7 @@ namespace ScheduleCommon
                     }
                 }
             }
-            return new ConstraintResult(pass, errorContainer.ToString());
+            return new ConstraintResult(pass, errorContainer.ToString().Trim());
         }
     }
 }

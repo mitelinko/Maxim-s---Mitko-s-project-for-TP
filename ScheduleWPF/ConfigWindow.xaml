@@ -88,6 +88,22 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <ListBox Name="listConstraints" Grid.Column="0"/>
+                    <StackPanel Grid.Column="1">
+                        <Label>Constraint type:</Label>
+                        <ComboBox Name="comboConstraintType">
+                            <ComboBoxItem>All Professors Day Limit</ComboBoxItem>
+                            <ComboBoxItem>Class Count Day Limit</ComboBoxItem>
+                            <ComboBoxItem>Professor Day&amp;Time Limit</ComboBoxItem>
+                            <ComboBoxItem>Professor Day Constraint</ComboBoxItem>
+                            <ComboBoxItem>Professor Time Constraint</ComboBoxItem>
+                            <ComboBoxItem>Single Professor Day Limit</ComboBoxItem>
+                        </ComboBox>
+                        <Button Margin="0,4" Name="buttonCreateConstraint" Click="buttonCreateConstraint_Click">Create constraint</Button>
+                        <!--
+                        <Button Margin="0,4" Name="buttonCreateRoom" Click="buttonCreateRoom_Click">Create room</Button>
+                        <Button Margin="0,4" Name="buttonDeleteRoom" Click="buttonDeleteRoom_Click">Delete selected room</Button>
+                        -->
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

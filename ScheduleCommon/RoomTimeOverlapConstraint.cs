@@ -8,9 +8,17 @@ namespace ScheduleCommon
     [Serializable]
     public class RoomTimeOverlapConstraint : IConstraint
     {
-        public RoomTimeOverlapConstraint()
+        public string Name { get; set; }
+        public RoomTimeOverlapConstraint(string aName)
         {
+            Name = aName;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", Name, "Room Time Overlap Constraint");
+        }
+
         public ConstraintResult Check(Schedule sched)
         {
             bool pass = true;
@@ -28,7 +36,7 @@ namespace ScheduleCommon
                         while (groupN2 < Configuration.Instance.Groups.Count)
                         {
                             var group2 = Configuration.Instance.Groups[groupN2];
-                            if (sched[day][group].Count != 0 && sched[day][group2].Count != 0)
+                            if (sched[day][group].Count != 0 && sched[day][group2].Count != 0 && classsN < sched[day][group2].Count)
                             {
                                 var classs = sched[day][group][classsN];
                                 var classs2 = sched[day][group2][classsN];
@@ -42,8 +50,9 @@ namespace ScheduleCommon
                                     if (end1 >= start2 && start2 <= end1 && end1 <= end2)
                                     {
                                         pass = false;
-                                        string error = string.Format("Room conflict: room {0} conflicts between group {1} and group {2} in day {3}",
-                                            classs.Room, group, group2, day);
+                                        string error = string.Format("Conflict: room {0} conflicts between group {1} and group {2} on {3}",
+                                            classs.Room, group, group2,
+                                            ConversionServices.GetDayNameFromDayNumber(day) );
                                         errorContainer.AppendLine(error);
                                     }
                                 }
@@ -54,7 +63,7 @@ namespace ScheduleCommon
                     }
                 }
             }
-                return new ConstraintResult(pass, errorContainer.ToString());
+            return new ConstraintResult(pass, errorContainer.ToString().Trim());
         }
     }
 }

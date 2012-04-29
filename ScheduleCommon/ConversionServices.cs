@@ -8,6 +8,15 @@ namespace ScheduleCommon
     public class ConversionServices
     {
         private static List<string> dayNames = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        
+        public static List<string> DayNames
+        {
+            get
+            {
+                return dayNames;
+            }
+        }
+        
         public static string GetDayNameFromDayNumber(int aDay)
         {
             if (aDay < 0 || aDay >= dayNames.Count)

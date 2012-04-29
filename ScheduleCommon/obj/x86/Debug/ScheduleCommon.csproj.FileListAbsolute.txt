@@ -7,3 +7,8 @@ C:\GIT\TP\ScheduleCommon\bin\Debug\ScheduleCommon.pdb
 C:\GIT\TP\ScheduleCommon\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\GIT\TP\ScheduleCommon\obj\x86\Debug\ScheduleCommon.dll
 C:\GIT\TP\ScheduleCommon\obj\x86\Debug\ScheduleCommon.pdb
+C:\advsch\ScheduleCommon\bin\Debug\ScheduleCommon.dll
+C:\advsch\ScheduleCommon\bin\Debug\ScheduleCommon.pdb
+C:\advsch\ScheduleCommon\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\advsch\ScheduleCommon\obj\x86\Debug\ScheduleCommon.dll
+C:\advsch\ScheduleCommon\obj\x86\Debug\ScheduleCommon.pdb

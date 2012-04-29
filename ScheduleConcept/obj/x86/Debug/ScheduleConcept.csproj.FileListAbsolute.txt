@@ -14,3 +14,11 @@ C:\GIT\TP\ScheduleConcept\bin\Debug\ScheduleShared.pdb
 C:\GIT\TP\ScheduleConcept\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\GIT\TP\ScheduleConcept\obj\x86\Debug\ScheduleConcept.exe
 C:\GIT\TP\ScheduleConcept\obj\x86\Debug\ScheduleConcept.pdb
+C:\advsch\ScheduleConcept\bin\Debug\info.xml
+C:\advsch\ScheduleConcept\bin\Debug\ScheduleConcept.exe
+C:\advsch\ScheduleConcept\bin\Debug\ScheduleConcept.pdb
+C:\advsch\ScheduleConcept\bin\Debug\ScheduleShared.dll
+C:\advsch\ScheduleConcept\bin\Debug\ScheduleShared.pdb
+C:\advsch\ScheduleConcept\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\advsch\ScheduleConcept\obj\x86\Debug\ScheduleConcept.exe
+C:\advsch\ScheduleConcept\obj\x86\Debug\ScheduleConcept.pdb

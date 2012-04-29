@@ -8,8 +8,10 @@ namespace ScheduleCommon
     /// <summary>
     /// A schedule constraint.
     /// </summary>
+
     public interface IConstraint
     {
+        string Name { get; set; }
         ConstraintResult Check(Schedule aSchedule);
     }
 }

@@ -10,6 +10,12 @@ namespace ScheduleCommon
     {
         public string Name { get; set; }
         public CourseType Type { get; set; }
+        public static Room Empty = new Room();
+        private Room()
+        {
+            Name = "none";
+            Type = CourseType.NormalCourse;
+        }
         public Room(string aName, CourseType aType)
         {
             Name = aName;

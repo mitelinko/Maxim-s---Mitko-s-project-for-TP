@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\GIT\TP\ScheduleWPF\obj\x86\Debug\
+C:\advsch\ScheduleWPF\obj\x86\Debug\
 ScheduleWPF
 none
 false
 DEBUG;TRACE
-C:\GIT\TP\ScheduleWPF\App.xaml
-2638605316
+C:\advsch\ScheduleWPF\App.xaml
+8-89575974
 
-9-1151606046
-14-2112099466
-ConfigWindow.xaml;MainWindow.xaml;
+15-1245750398
+14-1967699108
+AllProfessorsDayLimitWindow.xaml;ClassCountDayLimitWindow.xaml;ConfigWindow.xaml;MainWindow.xaml;ProfessorDayAndTimeWindow.xaml;ProfessorDaysOffWindow.xaml;ProfessorTimeOffWindow.xaml;SingleProfessorDayLimitWindow.xaml;
 
 True
 

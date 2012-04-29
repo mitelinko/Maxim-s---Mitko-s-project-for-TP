@@ -9,7 +9,8 @@ namespace ScheduleCommon
     public enum CourseType
     {
         NormalCourse,
-        ComputerCourse
+        ComputerCourse,
+        Break
     }
     [Serializable]
     public class Course
